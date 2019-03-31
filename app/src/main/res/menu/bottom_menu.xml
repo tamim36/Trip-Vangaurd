@@ -12,10 +12,10 @@
         />
 
     <item
-        android:id="@+id/action_school"
-        android:title="School"
+        android:id="@+id/action_atm"
+        android:title="ATM"
         android:enabled="true"
-        android:icon="@drawable/ic_school_black_24dp"
+        android:icon="@drawable/ic_local_atm_black_24dp"
         app:showAsAction="ifRoom"
         />
 
@@ -28,10 +28,10 @@
         />
 
     <item
-        android:id="@+id/action_hospital"
-        android:title="Hospital"
+        android:id="@+id/action_tourist_place"
+        android:title="Tourist Place"
         android:enabled="true"
-        android:icon="@drawable/ic_local_hospital_black_24dp"
+        android:icon="@drawable/ic_ac_unit_black_24dp"
         app:showAsAction="ifRoom"
         />
 

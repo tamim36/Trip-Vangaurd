@@ -83,8 +83,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 switch (menuItem.getItemId())
                 {
-                    case R.id.action_hospital:
-                        nearbyPlace("hospital");
+                    case R.id.action_tourist_place:
+                        placeFromDatabase();
                         break;
                     case R.id.action_market:
                         nearbyPlace("market");
@@ -92,8 +92,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     case R.id.action_restaurant:
                         nearbyPlace("restaurant");
                         break;
-                    case R.id.action_school:
-                        nearbyPlace("school");
+                    case R.id.action_atm:
+                        nearbyPlace("atm");
                         break;
                     default:
                         break;
@@ -103,6 +103,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
     }
+
+    private void placeFromDatabase() {
+        mMap.clear();
+        LatLng sylhet = new LatLng(24.906279, 91.839010);
+        mMap.addMarker(new MarkerOptions().position(sylhet).title("Sylhet"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sylhet));
+
+        LatLng saintMartin = new LatLng(20.631214, 92.319767);
+        mMap.addMarker(new MarkerOptions().position(saintMartin).title("Saint Martin"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(saintMartin));
+    }
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -149,7 +161,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                                 else if (placeType.equals("restaurant"))
                                     markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-                                else if (placeType.equals("school"))
+                                else if (placeType.equals("atm"))
                                     markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                                 else
                                     markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
