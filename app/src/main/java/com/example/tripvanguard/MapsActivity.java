@@ -86,14 +86,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     case R.id.action_tourist_place:
                         placeFromDatabase();
                         break;
-                    case R.id.action_market:
-                        nearbyPlace("market");
+                    case R.id.action_entertainment:
+                        combinePlace("A");
                         break;
-                    case R.id.action_restaurant:
+                    case R.id.action_stand:
+                        combinePlace("B");
+                        break;
+                    /*case R.id.action_restaurant:
                         nearbyPlace("restaurant");
-                        break;
+                        break; */
                     case R.id.action_atm:
                         nearbyPlace("atm");
+                        break;
+                    /*case R.id.action_police:
+                        nearbyPlace("police");
+                        break;*/
+                    case R.id.action_travelAgency:
+                        nearbyPlace("travel_agency");
                         break;
                     default:
                         break;
@@ -103,6 +112,55 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
     }
+
+    private void combinePlace(String a) {
+        mMap.clear();
+        String[] placeArray = new String[20] ;
+        if (a == "A")
+            placeArray = new String[]{"amusement_park", "art_gallery", "museum", "park", "zoo"};
+        else if (a=="B")
+            placeArray = new String[]{"bus_station", "train_station"};
+
+        for (int j=0; j<placeArray.length; j++) {
+            String url = getUrl(latitude, longtitude, placeArray[j]);
+
+            mServices.getNearbyPlaces(url)
+                    .enqueue(new Callback<MyPlace>() {
+                        @Override
+                        public void onResponse(Call<MyPlace> call, Response<MyPlace> response) {
+                            if (response.isSuccessful()) {
+                                for (int i = 0; i < response.body().getResults().length; i++) {
+                                    if(i==9)
+                                        break;  //For not much place in the same category
+                                    MarkerOptions markerOptions = new MarkerOptions();
+                                    Results googlePlaces = response.body().getResults()[i];
+                                    double lat = Double.parseDouble(googlePlaces.getGeometry().getLocation().getLat());
+                                    double lng = Double.parseDouble(googlePlaces.getGeometry().getLocation().getLng());
+
+                                    String placeName = googlePlaces.getName();
+                                    String vicsinity = googlePlaces.getVicinity();
+                                    LatLng latLng = new LatLng(lat, lng);
+                                    markerOptions.position(latLng);
+                                    markerOptions.title(placeName);
+                                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+
+
+                                    mMap.addMarker(markerOptions);
+
+                                    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                                    mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<MyPlace> call, Throwable t) {
+
+                        }
+                    });
+        }
+    }
+
 
     private void placeFromDatabase() {
         mMap.clear();
@@ -189,7 +247,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         googlePlacesUrl.append("&radius="+10000);
         googlePlacesUrl.append("&type="+placeType);
         googlePlacesUrl.append("&sensor=true");
-        googlePlacesUrl.append("&key="+getResources().getString(R.string.Browser_key));
+        googlePlacesUrl.append("&key="+getResources().getString(R.string.google_maps_key));
         Log.d("getUrl",googlePlacesUrl.toString());
         return googlePlacesUrl.toString();
     }
