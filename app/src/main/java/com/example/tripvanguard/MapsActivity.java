@@ -17,6 +17,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.tripvanguard.Model.MyPlace;
@@ -46,10 +47,12 @@ import retrofit2.Response;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.
             ConnectionCallbacks,
             GoogleApiClient.OnConnectionFailedListener,
+            GoogleMap.InfoWindowAdapter,
             LocationListener
 {
 
     private static final int MY_PERMISSION_CODE = 1000;
+    private static int snippet_check = 0;
     public GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
 
@@ -88,24 +91,29 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 switch (menuItem.getItemId())
                 {
                     case R.id.action_tourist_place:
+                        snippet_check = 0;
                         placeFromDatabase();
                         break;
                     case R.id.action_entertainment:
+                        snippet_check = 1;
                         combinePlace("A");
                         break;
                     case R.id.action_stand:
+                        snippet_check = 1;
                         combinePlace("B");
                         break;
                     /*case R.id.action_restaurant:
                         nearbyPlace("restaurant");
                         break; */
                     case R.id.action_atm:
+                        snippet_check = 1;
                         nearbyPlace("atm");
                         break;
                     /*case R.id.action_police:
                         nearbyPlace("police");
                         break;*/
                     case R.id.action_travelAgency:
+                        snippet_check = 1;
                         nearbyPlace("travel_agency");
                         break;
                     default:
@@ -151,12 +159,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     markerOptions.title(placeName);
                                     markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
 
-                                    markerOptions.snippet(String.valueOf(i));
+                                    //markerOptions.snippet(String.valueOf(i));
 
                                     mMap.addMarker(markerOptions);
 
                                     mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
                                     mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
+
                                 }
                             }
                         }
@@ -206,6 +215,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             buildGoogleApiClient();
             mMap.setMyLocationEnabled(true);
         }
+        mMap.setOnInfoWindowClickListener(MyOnInfoWindowClickListener);
         //event click for markers
         /*mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
@@ -227,6 +237,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });*/
     }
+    GoogleMap.OnInfoWindowClickListener MyOnInfoWindowClickListener
+            = new GoogleMap.OnInfoWindowClickListener(){
+        @Override
+        public void onInfoWindowClick(Marker marker) {
+            /*Toast.makeText(MapsActivity.this,
+                    "onInfoWindowClick():\n" +
+                            marker.getPosition().latitude + "\n" +
+                            marker.getPosition().longitude,
+                    Toast.LENGTH_LONG).show();*/
+                    if (snippet_check == 0)
+                        startActivity(new Intent(MapsActivity.this, TripInfo.class));
+                    //else
+                        //startActivity(new Intent(MapsActivity.this, ViewDetails.class));
+        }
+    };
 
     private void nearbyPlace(final String placeType) {
         mMap.clear();
@@ -262,7 +287,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
 
                                 //indexing marker to view details
-                                markerOptions.snippet(String.valueOf(i));
+                                //markerOptions.snippet(String.valueOf(i));
 
                                 mMap.addMarker(markerOptions);
 
@@ -389,5 +414,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         if (mGoogleApiClient != null)
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient,this);
+    }
+
+    @Override
+    public View getInfoWindow(Marker marker) {
+
+        return null;
+    }
+
+    @Override
+    public View getInfoContents(Marker marker) {
+        return null;
     }
 }
