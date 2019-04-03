@@ -23,5 +23,5 @@
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
         AIzaSyBG8vXMRYkW-B-9RMzYrizD-fbLidU4ing
     </string>
-    <string name="Browser_key">AIzaSyAoF4MNcruYDlIof6J0-mffdmkve3sqwi0</string>
+    <string name="Browser_key">AIzaSyBG8vXMRYkW-B-9RMzYrizD-fbLidU4ing</string>
 </resources>

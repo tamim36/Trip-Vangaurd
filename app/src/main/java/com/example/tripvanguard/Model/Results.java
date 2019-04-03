@@ -12,12 +12,14 @@ public class Results {
     private String name;
 
     private Geometry geometry;
+    private String rating;
 
     private String vicinity;
 
     private String id;
 
     private Photos[] photos;
+    private Opening_hours opening_hours;
 
     private String place_id;
 
@@ -120,10 +122,30 @@ public class Results {
     {
         this.place_id = place_id;
     }
+    public Opening_hours getOpening_hours ()
+    {
+        return opening_hours;
+    }
 
+    public void setOpening_hours (Opening_hours opening_hours)
+    {
+        this.opening_hours = opening_hours;
+    }
+
+    public String getRating ()
+    {
+        return rating;
+    }
+
+    public void setRating (String rating)
+    {
+        this.rating = rating;
+    }
     @Override
     public String toString()
     {
         return "ClassPojo [reference = "+reference+", types = "+types+", scope = "+scope+", icon = "+icon+", name = "+name+", geometry = "+geometry+", vicinity = "+vicinity+", id = "+id+", photos = "+photos+", place_id = "+place_id+"]";
     }
+
+
 }

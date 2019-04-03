@@ -3,6 +3,7 @@ package com.example.tripvanguard;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -36,6 +37,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -57,6 +60,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LocationRequest mLocationRequest;
 
 
+    MyPlace currentPlace;
     IGoogleApiServices mServices;
 
     @Override
@@ -128,6 +132,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     .enqueue(new Callback<MyPlace>() {
                         @Override
                         public void onResponse(Call<MyPlace> call, Response<MyPlace> response) {
+
+                            currentPlace = response.body();   //assign value to viewDetails
+
                             if (response.isSuccessful()) {
                                 for (int i = 0; i < response.body().getResults().length; i++) {
                                     if(i==9)
@@ -144,6 +151,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                     markerOptions.title(placeName);
                                     markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
 
+                                    markerOptions.snippet(String.valueOf(i));
 
                                     mMap.addMarker(markerOptions);
 
@@ -164,13 +172,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void placeFromDatabase() {
         mMap.clear();
-        LatLng sylhet = new LatLng(24.906279, 91.839010);
-        mMap.addMarker(new MarkerOptions().position(sylhet).title("Sylhet"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sylhet));
+        DatabaseAccess databaseAccess = DatabaseAccess.getInstance(getApplicationContext());
+        databaseAccess.open();
+        ArrayList<Double> lat;
+        ArrayList<Double> lng;
+        ArrayList<String> placeName;
 
-        LatLng saintMartin = new LatLng(20.631214, 92.319767);
-        mMap.addMarker(new MarkerOptions().position(saintMartin).title("Saint Martin"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(saintMartin));
+        lat = databaseAccess.getLat();
+        lng = databaseAccess.getLong();
+        placeName = databaseAccess.getPlaceName();
+        for (int i=0; i<lat.size(); i++){
+            LatLng saintMartin = new LatLng(lat.get(i), lng.get(i));
+            mMap.addMarker(new MarkerOptions().position(saintMartin).title(placeName.get(i)));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(saintMartin));
+        }
+
+
     }
 
     @Override
@@ -189,6 +206,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             buildGoogleApiClient();
             mMap.setMyLocationEnabled(true);
         }
+        //event click for markers
+        /*mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                Log.d("getSnippet", marker.getSnippet());
+
+               // if (marker.getSnippet() == "500"){
+                 //   startActivity(new Intent(MapsActivity.this, TripInfo.class));
+                    //return true;
+                //}
+                //else {
+                    //get result and assign to static variable n.b getresult return an array
+                    Common.currentResults = currentPlace.getResults()[Integer.parseInt(marker.getSnippet())];
+
+                    startActivity(new Intent(MapsActivity.this, ViewDetails.class));
+
+                //}
+                return true;
+            }
+        });*/
     }
 
     private void nearbyPlace(final String placeType) {
@@ -224,7 +261,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                 else
                                     markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
 
-
+                                //indexing marker to view details
+                                markerOptions.snippet(String.valueOf(i));
 
                                 mMap.addMarker(markerOptions);
 
