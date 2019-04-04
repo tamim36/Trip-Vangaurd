@@ -1,0 +1,44 @@
+{
+  "project_info": {
+    "project_number": "456476534555",
+    "firebase_url": "https://tripvangaurd.firebaseio.com",
+    "project_id": "tripvangaurd",
+    "storage_bucket": "tripvangaurd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456476534555:android:b9e709a1271be188",
+        "android_client_info": {
+          "package_name": "com.example.tripvanguard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "456476534555-sbfjig1uahpap4a7rcb1fqjf2jak83jm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tripvanguard",
+            "certificate_hash": "0242d5363f7cdb18e5a0d5f2469d15d9f4e2cbf8"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbINsyBkLmmd2ctRON-fEMmPp9MINbxig"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "456476534555-e9ntoa0d77iu8aoki17m8n9cm5m0a7r3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

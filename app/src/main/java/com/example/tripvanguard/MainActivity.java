@@ -11,7 +11,13 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.example.tripvanguard.findTrekker.Homepage;
+import com.example.tripvanguard.findTrekker.MainTrekker;
+import com.google.firebase.FirebaseApp;
+
 public class MainActivity extends AppCompatActivity {
+
+    //FirebaseApp.initializeApp(this);
 
     ImageView bgapp, clover;
     LinearLayout textsplash, texthome, menus;
@@ -21,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        FirebaseApp.initializeApp(this);
 
         frombottom = AnimationUtils.loadAnimation(this, R.anim.frombottom);
 
@@ -43,6 +50,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, MapsActivity.class));
+            }
+        });
+
+        ImageView findTre = (ImageView)findViewById(R.id.find_trekker_btn);
+        findTre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, MainTrekker.class));
             }
         });
     }
