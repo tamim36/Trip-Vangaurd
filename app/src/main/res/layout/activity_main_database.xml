@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".mainDatabase">
+
+    <EditText
+        android:id ="@+id/fromfield"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:hint="Start place"
+        android:drawableLeft="@drawable/my_location"/>
+
+    <EditText
+        android:id ="@+id/tofield"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:hint="Destination place"
+        android:drawableLeft="@drawable/destin"/>
+
+    <Button
+        android:id = "@+id/buttonquery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="Get Information"
+        android:background="@color/blue"
+        android:textColor="@color/white"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black">
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:id = "@+id/title_field"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:background="@color/black"
+                android:textColor="@color/green"
+                android:textSize="20dp"/>
+            <TextView
+                android:id = "@+id/infofield"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:background="@color/black"
+                android:textColor="@color/white"
+                android:textSize="15dp"/>
+            <TextView
+                android:id = "@+id/title2_field"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:background="@color/black"
+                android:textColor="@color/green"
+                android:textSize="20dp"/>
+            <TextView
+                android:id = "@+id/info2_field"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:background="@color/black"
+                android:textColor="@color/colorWhite"
+                android:textSize="15dp"/>
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

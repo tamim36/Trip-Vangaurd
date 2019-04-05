@@ -110,14 +110,9 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginBottom="4dp"
-                    android:src="@drawable/bitcon" />
+                    android:src="@drawable/find_friends" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="BitCoin"
-                    android:textColor="#0E1843"
-                    android:textSize="22sp" />
+
 
             </LinearLayout>
 
@@ -135,14 +130,9 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginBottom="4dp"
-                    android:src="@drawable/bellcon" />
+                    android:src="@drawable/nearest" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Bells"
-                    android:textColor="#0E1843"
-                    android:textSize="22sp" />
+
 
             </LinearLayout>
 
@@ -166,17 +156,13 @@
 
 
                 <ImageView
+                    android:id="@+id/databaseInfo"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginBottom="4dp"
-                    android:src="@drawable/bookcon" />
+                    android:src="@drawable/route_info" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Books"
-                    android:textColor="#0E1843"
-                    android:textSize="22sp" />
+
 
             </LinearLayout>
 
@@ -192,14 +178,9 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_marginBottom="4dp"
-                    android:src="@drawable/bugcon" />
+                    android:src="@drawable/popular" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Reports"
-                    android:textColor="#0E1843"
-                    android:textSize="22sp" />
+
 
             </LinearLayout>
 

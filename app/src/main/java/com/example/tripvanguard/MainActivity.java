@@ -60,5 +60,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, MainTrekker.class));
             }
         });
+
+        ImageView dataInfor = (ImageView)findViewById(R.id.databaseInfo);
+        dataInfor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, mainDatabase.class));
+            }
+        });
     }
 }

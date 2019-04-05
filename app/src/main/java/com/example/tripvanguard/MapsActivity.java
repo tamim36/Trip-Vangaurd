@@ -247,7 +247,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             marker.getPosition().longitude,
                     Toast.LENGTH_LONG).show();*/
                     if (snippet_check == 0)
-                        startActivity(new Intent(MapsActivity.this, TripInfo.class));
+                        startActivity(new Intent(MapsActivity.this, mainDatabase.class));
                     //else
                         //startActivity(new Intent(MapsActivity.this, ViewDetails.class));
         }
